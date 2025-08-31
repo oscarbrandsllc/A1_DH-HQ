@@ -893,10 +893,14 @@ function showLegend(){ try{ document.getElementById('legend-section')?.classList
 
             tradeSimulator.style.display = 'block';
             tradeSimulator.innerHTML = `
+            <button id="tradeExpandButton">▲</button>
             <div class="trade-container glass-panel">
               <div class="trade-header">
                 <h3>Trade Preview</h3>
-                <button id="clearTradeButton">Clear</button>
+                <div class="flex gap-2">
+                  <button id="tradeCollapseButton">▼</button>
+                  <button id="clearTradeButton">Clear</button>
+                </div>
               </div>
               <div class="trade-body"></div>
               <div class="trade-footnote">• Non-Adjusted Values •</div>
@@ -963,6 +967,14 @@ function showLegend(){ try{ document.getElementById('legend-section')?.classList
             tradeBody.innerHTML = bodyHtml;
 
             document.getElementById('clearTradeButton').addEventListener('click', clearTrade);
+            document.getElementById('tradeCollapseButton').addEventListener('click', () => {
+                tradeSimulator.classList.add('collapsed');
+                mainContent.style.paddingBottom = '1rem';
+            });
+            document.getElementById('tradeExpandButton').addEventListener('click', () => {
+                tradeSimulator.classList.remove('collapsed');
+                mainContent.style.paddingBottom = `${tradeSimulator.offsetHeight + 40}px`;
+            });
             mainContent.style.paddingBottom = `${tradeSimulator.offsetHeight + 40}px`;
         }
 
