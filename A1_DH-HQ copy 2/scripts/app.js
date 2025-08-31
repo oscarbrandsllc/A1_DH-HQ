@@ -108,7 +108,7 @@ function showLegend(){ try{ document.getElementById('legend-section')?.classList
         });
 
         // --- State ---
-        let state = { userId: null, leagues: [], players: {}, oneQbData: {}, sflxData: {}, currentLeagueId: null, isSuperflex: false, cache: {}, teamsToCompare: new Set(), isCompareMode: false, currentRosterView: 'positional', activePositions: new Set(), tradeBlock: {} };
+        let state = { userId: null, leagues: [], players: {}, oneQbData: {}, sflxData: {}, currentLeagueId: null, isSuperflex: false, cache: {}, teamsToCompare: new Set(), isCompareMode: false, currentRosterView: 'positional', activePositions: new Set(), tradeBlock: {}, isTradeCollapsed: false };
         const assignedLeagueColors = new Map();
         let nextColorIndex = 0;
         const assignedRyColors = new Map();
@@ -896,11 +896,15 @@ function showLegend(){ try{ document.getElementById('legend-section')?.classList
             <div class="trade-container glass-panel">
               <div class="trade-header">
                 <h3>Trade Preview</h3>
-                <button id="clearTradeButton">Clear</button>
+                <div class="trade-actions">
+                  <button id="collapseTradeButton">&#9660;</button>
+                  <button id="clearTradeButton">Clear</button>
+                </div>
               </div>
               <div class="trade-body"></div>
               <div class="trade-footnote">• Non-Adjusted Values •</div>
             </div>
+            <button id="showTradeButton">&#9650;</button>
             `;
 
             const tradeBody = tradeSimulator.querySelector('.trade-body');
@@ -962,7 +966,20 @@ function showLegend(){ try{ document.getElementById('legend-section')?.classList
             
             tradeBody.innerHTML = bodyHtml;
 
+            tradeSimulator.classList.toggle('collapsed', state.isTradeCollapsed);
+
             document.getElementById('clearTradeButton').addEventListener('click', clearTrade);
+            document.getElementById('collapseTradeButton').addEventListener('click', () => {
+                tradeSimulator.classList.add('collapsed');
+                state.isTradeCollapsed = true;
+                mainContent.style.paddingBottom = `${tradeSimulator.offsetHeight + 40}px`;
+            });
+            document.getElementById('showTradeButton').addEventListener('click', () => {
+                tradeSimulator.classList.remove('collapsed');
+                state.isTradeCollapsed = false;
+                mainContent.style.paddingBottom = `${tradeSimulator.offsetHeight + 40}px`;
+            });
+
             mainContent.style.paddingBottom = `${tradeSimulator.offsetHeight + 40}px`;
         }
 
