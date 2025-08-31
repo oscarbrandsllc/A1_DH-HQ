@@ -770,7 +770,7 @@
         .trade-container {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 0.25rem;
         }
 
         .trade-header { 
@@ -785,11 +785,11 @@
             color: #b0bcdb;
             text-shadow: 0 0 5px rgba(0,0,0,0.5);
         }
-        #clearTradeButton { 
-            background: var(--color-bg-light); 
-            color: var(--color-text-secondary); 
-            font-size: 0.8rem; 
-            padding: 4px 10px; 
+        #clearTradeButton {
+            background: var(--color-bg-light);
+            color: var(--color-text-secondary);
+            font-size: 0.8rem;
+            padding: 4px 10px;
             border-radius: 6px;
             border: 1px solid var(--color-panel-border);
             cursor: pointer;
@@ -798,6 +798,40 @@
         #clearTradeButton:hover {
             color: var(--color-text-primary);
             border-color: var(--color-panel-border-glow);
+        }
+        #toggleTradeButton {
+            background: var(--color-bg-light);
+            color: var(--color-text-secondary);
+            font-size: 0.8rem;
+            padding: 4px 6px;
+            border-radius: 6px;
+            border: 1px solid var(--color-panel-border);
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-right: 0.25rem;
+        }
+        #toggleTradeButton:hover {
+            color: var(--color-text-primary);
+            border-color: var(--color-panel-border-glow);
+        }
+        #showTradeButton {
+            background: var(--color-bg-light);
+            color: var(--color-text-secondary);
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--color-panel-border);
+            cursor: pointer;
+            transition: all 0.2s;
+            margin: 0 auto;
+        }
+        #showTradeButton:hover {
+            color: var(--color-text-primary);
+            border-color: var(--color-panel-border-glow);
+        }
+        .trade-actions {
+            display: flex;
+            align-items: center;
         }
 
         .trade-body { 
@@ -883,7 +917,7 @@
     font-size: 0.75em;
     color: #A0A6D0;
     font-weight: 300;
-    margin-top: 0.2rem;
+    margin-top: 0;
     padding-bottom: 0.1rem;
 }
 /* Only the Trade Preview popup glass */

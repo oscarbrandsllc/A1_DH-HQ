@@ -896,11 +896,15 @@ function showLegend(){ try{ document.getElementById('legend-section')?.classList
             <div class="trade-container glass-panel">
               <div class="trade-header">
                 <h3>Trade Preview</h3>
-                <button id="clearTradeButton">Clear</button>
+                <div class="trade-actions">
+                  <button id="toggleTradeButton" aria-label="Hide trade preview">▼</button>
+                  <button id="clearTradeButton">Clear</button>
+                </div>
               </div>
               <div class="trade-body"></div>
               <div class="trade-footnote">• Non-Adjusted Values •</div>
             </div>
+            <button id="showTradeButton" class="hidden" aria-label="Show trade preview">▲</button>
             `;
 
             const tradeBody = tradeSimulator.querySelector('.trade-body');
@@ -963,6 +967,22 @@ function showLegend(){ try{ document.getElementById('legend-section')?.classList
             tradeBody.innerHTML = bodyHtml;
 
             document.getElementById('clearTradeButton').addEventListener('click', clearTrade);
+            const toggleBtn = document.getElementById('toggleTradeButton');
+            const showBtn = document.getElementById('showTradeButton');
+            const tradeContainer = tradeSimulator.querySelector('.trade-container');
+
+            toggleBtn.addEventListener('click', () => {
+                tradeContainer.style.display = 'none';
+                showBtn.classList.remove('hidden');
+                mainContent.style.paddingBottom = `${showBtn.offsetHeight + 40}px`;
+            });
+
+            showBtn.addEventListener('click', () => {
+                tradeContainer.style.display = '';
+                showBtn.classList.add('hidden');
+                mainContent.style.paddingBottom = `${tradeSimulator.offsetHeight + 40}px`;
+            });
+
             mainContent.style.paddingBottom = `${tradeSimulator.offsetHeight + 40}px`;
         }
 
