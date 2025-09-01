@@ -27,6 +27,7 @@ function showLegend(){ try{ document.getElementById('legend-section')?.classList
         const tradeSimulator = document.getElementById('tradeSimulator');
         const mainContent = document.getElementById('content');
         const pageType = document.body.dataset.page || 'welcome';
+        const headerTopRow = document.querySelector('.app-header .header-row');
 
         // --- Menu Button ---
         const menuButton = document.getElementById('menu-button');
@@ -352,8 +353,9 @@ function showLegend(){ try{ document.getElementById('legend-section')?.classList
             rosterView.classList.toggle('is-trade-mode', state.isCompareMode);
             rosterGrid.classList.toggle('is-preview-mode', state.isCompareMode);
             updateCompareButtonState();
-            renderAllTeamData(state.currentTeams); 
+            renderAllTeamData(state.currentTeams);
             renderTradeBlock();
+            updateMobileHeaderForPreview();
         }
 
         function handleClearCompare(keepUserTeam = false) {
@@ -374,6 +376,7 @@ function showLegend(){ try{ document.getElementById('legend-section')?.classList
             if (state.currentTeams) {
                 renderAllTeamData(state.currentTeams);
             }
+            updateMobileHeaderForPreview();
         }
 
         function updateCompareButtonState() {
@@ -399,6 +402,15 @@ function showLegend(){ try{ document.getElementById('legend-section')?.classList
             
             if (count < 2 && state.isCompareMode) {
                 handleCompareClick(); // Automatically exit compare mode
+            }
+        }
+
+        function updateMobileHeaderForPreview() {
+            if (!headerTopRow) return;
+            if (window.innerWidth <= 640 && state.isCompareMode) {
+                headerTopRow.classList.add('mobile-hidden');
+            } else {
+                headerTopRow.classList.remove('mobile-hidden');
             }
         }
 
@@ -896,10 +908,8 @@ function showLegend(){ try{ document.getElementById('legend-section')?.classList
             <div class="trade-container glass-panel">
               <div class="trade-header">
                 <h3>Trade Preview</h3>
-                <div class="trade-actions">
-                  <button id="clearTradeButton">Clear</button>
-                  <button id="collapseTradeButton">Hide &#9662;</button>
-                </div>
+                <button id="collapseTradeButton">Hide &#9662;</button>
+                <button id="clearTradeButton">Clear</button>
               </div>
               <div class="trade-body"></div>
               <div class="trade-footnote">• Non-Adjusted Values •</div>
