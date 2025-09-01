@@ -242,6 +242,11 @@
             display: none;
         }
 
+        @media (max-width: 640px) {
+            .mobile-hidden {
+                display: none;
+            }
+        }
 /* Ensure hidden truly hides views regardless of ID display rules */
 #playerListView.hidden, #rosterView.hidden { display: none !important; }
 
@@ -775,8 +780,8 @@
         }
 
         .trade-header {
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
             align-items: center;
             padding: 0 0.25rem;
         }
@@ -786,10 +791,12 @@
             color: #b0bcdb;
             text-shadow: 0 0 5px rgba(0,0,0,0.5);
         }
-        .trade-actions {
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
+        #collapseTradeButton {
+            justify-self: center;
+            margin-right: 0;
+        }
+        #clearTradeButton {
+            justify-self: end;
         }
                 
         /* SHOW TRADE CONTAINER BUTTON */
@@ -822,7 +829,7 @@
             background: #1E1F3030;
             color: #8066CF;
             font-size: 0.8rem;
-            margin-right: 3px;
+            margin-right: 0;
             border: 1px solid #9096C055;
             border-radius: 6px;
             padding: 2px 8px;
@@ -841,7 +848,7 @@
             display: grid;
             grid-template-columns: 1fr auto 1fr;
             gap: 0.25rem;
-            align-items: center;
+            align-items: stretch;
         }
 
         .trade-divider {
@@ -849,12 +856,14 @@
             height: 80%;
             background-image: linear-gradient(to bottom, transparent, var(--color-accent-secondary), transparent);
             opacity: 0.7;
+            align-self: center;
         }
 
         .trade-team-column {
             display: flex;
             flex-direction: column;
             gap: 0.25rem;
+            height: 100%;
         }
         .trade-team-column h4 {
             font-size: 1rem;
@@ -896,7 +905,7 @@
         }
 
         .trade-total {
-            margin-top: 0.25rem;
+            margin-top: auto;
             text-align: center;
             font-size: 1rem;
             font-weight: 700;
